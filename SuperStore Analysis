@@ -25,3 +25,21 @@ VALUES
     (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
     (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+#Use a SELECT statement to order the items by price ( Ordered items in descending order).
+SELECT item_name, price
+FROM superstore
+ORDER BY price desc;
+
+#Show a statistic about the item prices ( Question Answered = What is the least expensive item in the category Electronics at this Superstore?.
+SELECT item_name, price, category, 
+MIN(price) AS min_price
+FROM superstore
+WHERE category = 'Electronics'
+ORDER BY min_price ASC
+#Show a statistic about the price for items in the category of "Furnishings" (Calculated the average stock for all items in the Furnishings category & ordered the items in descending order). 
+SELECT item_name, price, category, average_rating,
+AVG(stock_quantity) as avg_stock
+FROM superstore
+WHERE category = 'Furnishings'
+GROUP BY item_name ,price ,category, average_rating
+ORDER BY price DESC;
