@@ -37,7 +37,7 @@ FROM superstore
 WHERE category = 'Electronics'
 ORDER BY min_price ASC;
 
-#Show a statistic about the price for items in the category of "Furnishings" (Calculated the average stock for all items in the Furnishings category & ordered the items in descending order). 
+#Show a statistic about the price for items in the category of "Furnishings" (Calculated the average stock for all individual items in the Furnishings category & ordered the items in descending order). 
 SELECT item_name, price, category, average_rating,
 AVG(stock_quantity) as avg_stock
 FROM superstore
