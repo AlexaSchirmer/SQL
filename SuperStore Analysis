@@ -5,8 +5,7 @@
     category TEXT,
     price DECIMAL(10, 2),
     stock_quantity INTEGER,
-    average_rating DECIMAL(3, 2)
-);
+    average_rating DECIMAL(3, 2));
 
 INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
 VALUES
