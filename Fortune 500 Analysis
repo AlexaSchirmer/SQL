@@ -55,3 +55,11 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+* Grouped the data in a new way using a CASE statement ( Created a new column 'PTO Rating' to easily be able to group and identify how companies rank in terms of paid time off days given in descending order)
+SELECT company_name,paid_time_off_days,
+CASE WHEN paid_time_off_days >= 20 THEN 1
+WHEN paid_time_off_days >= 15 THEN 2
+WHEN paid_time_off_days < 15 THEN 3
+END AS  'PTO Rating'
+FROM fortune_companies
+ORDER BY paid_time_off_days DESC
