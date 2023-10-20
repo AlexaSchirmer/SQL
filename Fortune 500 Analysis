@@ -63,3 +63,13 @@ WHEN paid_time_off_days < 15 THEN 3
 END AS  'PTO Rating'
 FROM fortune_companies
 ORDER BY paid_time_off_days DESC
+Use a HAVING clause to determine something interesting about the data per category.(  Created a new column for showing the maximum amount of maternity leave a company gives * The MAX Function would be especially useful if the column maternity_leave_weeks data included ranges of weeks that maternity leave was allowed ex. 15-18 weeks* Found the top 3 companies that match both my 'clients' wishes for paid time off over 20 days and maternity weeks over 15, now they know what companies to apply for. 
+SELECT company_name, paid_time_off_days, MAX(maternity_leave_weeks) AS max_maternity_leave_weeks,
+CASE WHEN paid_time_off_days >= 20 THEN 1
+WHEN paid_time_off_days >= 15 THEN 2
+WHEN paid_time_off_days <15 THEN 3
+END AS 'PTO Rating'
+FROM fortune_companies
+GROUP BY company_name, paid_time_off_days
+HAVING MAX(maternity_leave_weeks) >= 15
+ORDER BY 'PTO Rating' DESC;
