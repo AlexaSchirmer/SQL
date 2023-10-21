@@ -1,3 +1,4 @@
+#Database that was queried below
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,
     company_name TEXT,
@@ -55,7 +56,8 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
-*# How do all companies in this table rank based on paid time off days given (rank in descending order) ?
+
+# How do all companies in this table rank based on paid time off days given (rank in descending order) ?
 SELECT company_name,paid_time_off_days,
 CASE WHEN paid_time_off_days >= 20 THEN 1
 WHEN paid_time_off_days >= 15 THEN 2
@@ -63,6 +65,7 @@ WHEN paid_time_off_days < 15 THEN 3
 END AS  'PTO Rating'
 FROM fortune_companies
 ORDER BY paid_time_off_days DESC
+
 #What are the best companies that have a paid time off of 20 days or more and a minimum of 15 weeks of maternity leave? (   The MIN Function would be especially useful if the column maternity_leave_weeks data included ranges of weeks that maternity leave would be offered for, ex. 15-18 weeks and the client wanted to ensure they get at least 15 weeks.
 CASE WHEN paid_time_off_days >= 20 THEN 1
 WHEN paid_time_off_days >= 15 THEN 2
@@ -72,6 +75,7 @@ FROM fortune_companies
 GROUP BY company_name, paid_time_off_days
 HAVING MIN(maternity_leave_weeks) >= 15
 ORDER BY 'PTO Rating' DESC;
+
 # If having under 2000 employees classifies you as a small business, which businesses would be considered small businesses (include revenue,industry,company_name,company_id and employees)?
 SELECT company_id,company_name,employees,Industry,revenue, 
 CASE WHEN employees <=2000 THEN 'Small Business'
@@ -81,3 +85,23 @@ END AS 'Business_Size'
 FROM fortune_companies
 WHERE employees <=2000
 ORDER BY employees DESC;
+
+# Which companies have the lowest revenue in each industry?
+SELECT industry,company_name,MIN(revenue) AS smallest_revenue
+FROM fortune_companies
+GROUP BY industry
+ORDER BY smallest_revenue;
+
+#What is the average revenue for each industry rounded to only include one decimal?
+SELECT industry,ROUND(AVG(revenue),1) AS Average_Revenue
+FROM fortune_companies
+GROUP BY Industry
+ORDER BY Average_Revenue DESC;
+
+#Which industry has the highest average revenue?
+SELECT industry,ROUND(AVG(revenue),1) AS Average_Revenue
+FROM fortune_companies
+GROUP BY Industry
+ORDER BY Average_Revenue DESC
+LIMIT 1;
+#Which industry and company has the best average tenure?
