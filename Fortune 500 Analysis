@@ -55,7 +55,7 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
-* Grouped the data in a new way using a CASE statement ( Created a new column 'PTO Rating' to easily be able to group and identify how companies rank in terms of paid time off days given in descending order)
+*# How do all companies in this table rank based on paid time off days given (rank in descending order) ?
 SELECT company_name,paid_time_off_days,
 CASE WHEN paid_time_off_days >= 20 THEN 1
 WHEN paid_time_off_days >= 15 THEN 2
@@ -63,13 +63,21 @@ WHEN paid_time_off_days < 15 THEN 3
 END AS  'PTO Rating'
 FROM fortune_companies
 ORDER BY paid_time_off_days DESC
-Use a HAVING clause to determine something interesting about the data per category.(  Created a new column for showing the maximum amount of maternity leave a company offers * The MAX Function would be especially useful if the column maternity_leave_weeks data included ranges of weeks that maternity leave was allowed ex. 15-18 weeks* Found 3 results ordered by 'PTO Rating DESC' that match both my 'client's' wishes for paid time off over 20 days and maternity weeks over 15, now they know what companies to apply for.
-SELECT company_name, paid_time_off_days, MAX(maternity_leave_weeks) AS max_maternity_leave_weeks,
+#What are the best companies that have a paid time off of 20 days or more and a minimum of 15 weeks of maternity leave? (   The MIN Function would be especially useful if the column maternity_leave_weeks data included ranges of weeks that maternity leave would be offered for, ex. 15-18 weeks and the client wanted to ensure they get at least 15 weeks.
 CASE WHEN paid_time_off_days >= 20 THEN 1
 WHEN paid_time_off_days >= 15 THEN 2
 WHEN paid_time_off_days <15 THEN 3
 END AS 'PTO Rating'
 FROM fortune_companies
 GROUP BY company_name, paid_time_off_days
-HAVING MAX(maternity_leave_weeks) >= 15
+HAVING MIN(maternity_leave_weeks) >= 15
 ORDER BY 'PTO Rating' DESC;
+# If having under 2000 employees classifies you as a small business, which businesses would be considered small businesses (include revenue,industry,company_name,company_id and employees)?
+SELECT company_id,company_name,employees,Industry,revenue, 
+CASE WHEN employees <=2000 THEN 'Small Business'
+WHEN employees >2000 AND employees <=10000 THEN 'Medium Business'
+ELSE 'Big Business'
+END AS 'Business_Size'
+FROM fortune_companies
+WHERE employees <=2000
+ORDER BY employees DESC;
