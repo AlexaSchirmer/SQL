@@ -104,4 +104,10 @@ FROM fortune_companies
 GROUP BY Industry
 ORDER BY Average_Revenue DESC
 LIMIT 1;
-#Which industry and company has the best average tenure?
+#Which company has the best average tenure (show as a percentage) and what industry are they in  ?
+SELECT industry, company_name,
+ROUND(AVG(avg_employee_tenure) * 10, 1) || '%' AS avg_tenure_rate
+FROM fortune_companies
+GROUP BY industry, company_name
+ORDER BY avg_tenure_rate DESC
+LIMIT 1;
