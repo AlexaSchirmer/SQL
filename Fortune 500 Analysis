@@ -64,7 +64,7 @@ WHEN paid_time_off_days >= 15 THEN 2
 WHEN paid_time_off_days < 15 THEN 3
 END AS  'PTO Rating'
 FROM fortune_companies
-ORDER BY paid_time_off_days DESC
+ORDER BY paid_time_off_days DESC;
 
 #What are the best companies that have a paid time off of 20 days or more and a minimum of 15 weeks of maternity leave? (   The MIN Function would be especially useful if the column maternity_leave_weeks data included ranges of weeks that maternity leave would be offered for, ex. 15-18 weeks and the client wanted to ensure they get at least 15 weeks.
 SELECT company_name,paid_time_off_days,maternity_leave_weeks,
