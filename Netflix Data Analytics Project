@@ -59,6 +59,7 @@ VALUES
     ('s19', 'Adam Salky', 'Freida Pinto| Logan Marshall-Green| Robert John Burke| Megan Elisabeth Kelly| Sarah Minnich| Hayes Hargrove| Mark Sivertsen| Brandon Fierro| Antonio Valles| Clint Obenchain'),
     ('s20', NULL, 'Blanca SuÃ¡rez| IvÃ¡n Marcos| Ã“scar Casas| AdriÃ¡n Lastra| Francesc Garrido| Stefan Weinert| Julia MÃ¶ller| Alicia Chojnowski')
     ;
+# The following SQL was written to answer specific questions about the content on Netflix:
 
 #How many movie titles are there in the database? (movies only, not tv shows) The First example would mostly be used if you were asking to select all,that are not TV Shows however since there are only two options in this database this query fits the question..
 SELECT COUNT(*)
