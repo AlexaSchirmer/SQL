@@ -95,4 +95,9 @@ WHERE length(orderid) = 6
 AND orderid <> 'Order ID'
 
 #13 What was the average quantity of products purchased per account in February?
+SELECT SUM(quantity)/ COUNT(customers.acctnum) AS Avg_quantity
+FROM FebSales
+LEFT JOIN customers ON FebSales.orderID=Customers.order_id
+WHERE LENGTH(orderid)=6
+AND orderid<> 'Order Id'
 #14 Which product brought in the most revenue in January and how much revenue did it bring in total?
