@@ -51,11 +51,12 @@ FROM FebSales
 WHERE location ='548 Lincoln St, Seattle, WA 98101'
 GROUP BY Product;
 
-SELECT COUNT(distinct customers.acctnum)AS CustomerCount,
+#8 How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+SELECT COUNT(DISTINCT customers.acctnum)AS CustomerCount,
 AVG(quantity*price) AS Avg_Spent
 FROM FebSales
 LEFT JOIN customers 
 ON FebSales.orderid=customers.order_id
 WHERE FebSales.Quantity>2
-AND length(orderid) = 6
+AND LENGTH(orderid) = 6
 AND orderid <> 'Order ID';
