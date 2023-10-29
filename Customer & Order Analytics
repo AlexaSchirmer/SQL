@@ -33,7 +33,7 @@ SELECT distinct product, MIN(price)
 FROM JanSales
 GROUP BY Product
 ORDER BY price ASC
-LIMIT 1
+LIMIT 1 ;
 
 #6 What is the total revenue for each product sold in January?
 SELECT Product,SUM(Quantity) * price AS Total_Revenue 
@@ -41,5 +41,21 @@ FROM JanSales
 WHERE Product <> 'Product' 
 GROUP BY Product
 HAVING Total_Revenue >0.0
-ORDER BY Total_Revenue ASC
+ORDER BY Total_Revenue ASC;
 
+#7 Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+SELECT COUNT(product),
+SUM(Quantity) AS Total_Sold,
+ SUM(Quantity)* Price AS Revenue,location
+FROM FebSales 
+WHERE location ='548 Lincoln St, Seattle, WA 98101'
+GROUP BY Product;
+
+SELECT COUNT(distinct customers.acctnum)AS CustomerCount,
+AVG(quantity*price) AS Avg_Spent
+FROM FebSales
+LEFT JOIN customers 
+ON FebSales.orderid=customers.order_id
+WHERE FebSales.Quantity>2
+AND length(orderid) = 6
+AND orderid <> 'Order ID';
