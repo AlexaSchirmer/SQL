@@ -77,8 +77,15 @@ AND orderid <> 'Order ID'
 GROUP BY Location 
 HAVING Order_total >=3;
 
-
 #11 How many of each type of headphone were sold in February?
+SELECT DISTINCT Product,SUM(Quantity) AS Total_Quantity
+FROM FebSales
+WHERE product LIKE '%headphone%'
+AND LENGTH(orderID)=6
+AND orderID<> 'Order Id'
+GROUP BY Product;
+
 #12 What was the average amount spent per account in February?
+
 #13 What was the average quantity of products purchased per account in February?
 #14 Which product brought in the most revenue in January and how much revenue did it bring in total?
