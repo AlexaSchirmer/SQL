@@ -53,4 +53,5 @@ ORDER BY popularity DESC
 LIMIT 10;
 # What is the average energy of all tracks in this table.
 SELECT AVG(energy) 
-FROM spotify_top50_2021;
+FROM spotify_top50_2021
+WHERE energy IS NOT NULL;
