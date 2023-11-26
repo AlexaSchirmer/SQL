@@ -1,0 +1,46 @@
+# In this Analytics Project I download Spotify Data from Kaggle 
+# I then created a table to insert the Spotify Data into
+# Lastly I performed analytics on the Data using SQL
+
+#CREATE TABLE "spotify_top50_2021" ( 
+"id" INTEGER, "artist_name" TEXT,
+"track_name" TEXT, "track_id" TEXT,
+"popularity" INTEGER,
+"danceability" REAL,
+"energy" REAL,
+"key" INTEGER,
+"loudness" REAL,
+"mode" INTEGER, 
+"speechiness" REAL,
+"acousticness" REAL,
+"instrumentalness" REAL,
+"liveness" REAL,
+"valence" REAL,
+"tempo" REAL,
+"duration_ms" INTEGER,
+"time_signature" INTEGER );
+ 
+#Then I inserted the Spotify Data.csv into the table.
+
+
+#Next, I explored the data using the following SQL. 
+
+# What were the top 3 hit songs by Olivia Rodrigo? ( Selected all Songs made by the artist under the name Olivia Rodrigo where the popularity was over or equal to 90 and Ordered the results by popularity in descending order with a limit of 3 to see the top 3 songs.) 
+SELECT * FROM spotify_top50_2021
+WHERE artist_name LIKE 'Olivia%' 
+AND artist_name LIKE '%Rodrigo'
+GROUP BY popularity
+HAVING popularity>=90 
+ORDER BY popularity DESC 
+LIMIT 3
+
+# Which artist had the longest song and what was that songs popularity?
+SELECT  MAX(duration_ms) ,artist_name,track_name,popularity
+FROM spotify_top50_2021 
+
+#Find all information on the tracks that have the key as 1 , order in alphabetical order.
+ SELECT * 
+ FROM spotify_top50_2021
+ WHERE key=1 
+ GROUP BY track_name
+ ORDER BY track_name ASC 
