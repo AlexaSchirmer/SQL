@@ -34,7 +34,7 @@ HAVING popularity>=90
 ORDER BY popularity DESC 
 LIMIT 3;
 
-# Which artist had the longest song and what was that songs popularity?
+# Which artist has the longest song and what was that song's popularity?
 SELECT  MAX(duration_ms) ,artist_name,track_name,popularity
 FROM spotify_top50_2021; 
 
